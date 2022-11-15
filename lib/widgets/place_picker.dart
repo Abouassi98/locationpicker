@@ -134,7 +134,7 @@ class PlacePickerState extends State<PlacePicker> {
     return WillPopScope(
       onWillPop: () {
         if (Platform.isAndroid) {
-          locationResult = null;
+        //  locationResult = null;
           _delayedPop();
           return Future.value(false);
         }  else  {

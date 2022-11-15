@@ -25,7 +25,7 @@ class SelectPlaceAction extends StatelessWidget {
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward)
+              Icon(Icons.done)
             ],
           ),
         ),
