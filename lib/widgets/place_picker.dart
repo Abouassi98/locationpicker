@@ -26,9 +26,9 @@ class PlacePicker extends StatefulWidget {
 
   /// Location to be displayed when screen is showed. If this is set or not null, the
   /// map does not pan to the user's current location.
-  final LatLng? displayLocation;
   LocalizationItem? localizationItem;
   LatLng defaultLocation = LatLng(10.5381264, 73.8827201);
+  final LatLng? displayLocation;
 
   PlacePicker(this.apiKey,
       {this.displayLocation, this.localizationItem, LatLng? defaultLocation}) {
@@ -134,8 +134,8 @@ class PlacePickerState extends State<PlacePicker> {
     return WillPopScope(
       onWillPop: () {
         if (Platform.isAndroid) {
-        //  locationResult = null;
-          _delayedPop();
+          // locationResult = null;
+          // _delayedPop();
           return Future.value(false);
         }  else  {
           return Future.value(true);
@@ -645,7 +645,7 @@ class PlacePickerState extends State<PlacePicker> {
       //moveToLocation(target);
       print('target:$target');
       return target;
-    } on TimeoutException catch (e) {
+    } on TimeoutException {
       final locationData = await Geolocator.getLastKnownPosition();
       if (locationData != null) {
         return LatLng(locationData.latitude, locationData.longitude);
