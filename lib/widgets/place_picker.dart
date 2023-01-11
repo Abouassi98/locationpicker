@@ -135,8 +135,8 @@ class PlacePickerState extends State<PlacePicker> {
       onWillPop: () {
         if (Platform.isAndroid) {
           // locationResult = null;
-         //  _delayedPop();
-          return Future.value(true);
+           _delayedPop();
+          return Future.value(false);
         }  else  {
           return Future.value(true);
         }
@@ -710,28 +710,26 @@ class PlacePickerState extends State<PlacePicker> {
 
   // add delay to the map pop to avoid `Fatal Exception: java.lang.NullPointerException` error on Android
   Future<bool> _delayedPop() async {
-    Navigator.of(context, rootNavigator: true).push(
-      PageRouteBuilder(
-        pageBuilder: (_, __, ___) => WillPopScope(
-          onWillPop: () async => false,
-          child: Scaffold(
-            backgroundColor: Colors.transparent,
-            body: Center(
-              child: CircularProgressIndicator.adaptive(),
-            ),
-          ),
-        ),
-        transitionDuration: Duration.zero,
-        barrierDismissible: false,
-        barrierColor: Colors.black45,
-        opaque: false,
-      ),
-    );
+    // Navigator.of(context, rootNavigator: true).push(
+    //   PageRouteBuilder(
+    //     pageBuilder: (_, __, ___) => WillPopScope(
+    //       onWillPop: () async => false,
+    //       child: Scaffold(
+    //         backgroundColor: Colors.transparent,
+    //         body: Center(
+    //           child: CircularProgressIndicator.adaptive(),
+    //         ),
+    //       ),
+    //     ),
+    //     transitionDuration: Duration.zero,
+    //     barrierDismissible: false,
+    //     barrierColor: Colors.black45,
+    //     opaque: false,
+    //   ),
+    // );
 
     await Future.delayed(const Duration(milliseconds: 500));
-    Navigator.of(context)
-      ..pop()
-      ..pop(this.locationResult);
+    Navigator.of(context).pop(this.locationResult);
     return Future.value(false);
   }
 }
